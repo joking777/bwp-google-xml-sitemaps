@@ -3263,6 +3263,8 @@ class BWP_Sitemaps extends BWP_Framework_V3
 				// if we can't use a gzipped file, decompress before reading it
 				readgzfile($cache_file);
 			}
+			
+			do_action('bwp_gxs_post_cache_read', $cache_file);
 		}
 
 		if (in_array($cache_status, array('200', '304')))
