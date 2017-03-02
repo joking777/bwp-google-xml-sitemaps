@@ -86,6 +86,8 @@ class BWP_GXS_CACHE
 
 	public function write_cache($contents)
 	{
+		$status = false;
+		
 		$cache_file = $this->cache_file;
 
 		$handle = @gzopen($cache_file, 'wb');
@@ -99,16 +101,16 @@ class BWP_GXS_CACHE
 
 			/* @umask(0000); */
 			@chmod($cache_file, 0644);
-		}
-		else
-		{
-			return false;
+			
+			$status = @filemtime($cache_file);
 		}
 
+		$status = apply_filter('bwp_gxs_post_cache_write', $status, $cache_file, $contents);
+		
 		// return the modification timestamp to construct etag
-		return @filemtime($cache_file);
+		return $status;
 	}
-
+	
 	/**
 	 * Gets current cache status for the requested sitemap
 	 *
