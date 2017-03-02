@@ -3784,6 +3784,8 @@ class BWP_Sitemaps extends BWP_Framework_V3
 			return;
 
 		$xml = $this->sitemap->get_xml();
+		
+		$xml = apply_filters('bwp_gxs_sitemap_content', $xml);
 
 		// compress the output using gzip if needed, but only if no active
 		// compressor is active
