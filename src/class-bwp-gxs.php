@@ -3265,6 +3265,8 @@ class BWP_Sitemaps extends BWP_Framework_V3
 			}
 			
 			do_action('bwp_gxs_post_cache_read', $cache_file);
+			
+			print apply_filters('bwp_gxs_sitemap_content', ob_get_contents());
 		}
 
 		if (in_array($cache_status, array('200', '304')))
